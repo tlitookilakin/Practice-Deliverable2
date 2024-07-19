@@ -5,6 +5,7 @@
 		private static string Username = "";
 		private static int score = 0;
 		private static readonly Random random = new();
+
 		private static readonly string[] losingInsults = [
 			"", " Hm, roast {0} DOES sound nice.", " As if you could ever win...", " This is hardly a competition, is it?", 
 			" I look forward to your humiliating defeat, {0}"
@@ -20,11 +21,13 @@
 			"NO! I'M supposed to WIN! NOT YOU! HOW DARE YOU!"
 		];
 
-		static void Main(string[] args)
+		static void Main(string[] _)
 		{
 			Console.WriteLine("Greetings, pathetic mortal. What is your name?");
 			Username = Console.ReadLine()?.Trim() ?? "";
-			Username = char.ToUpper(Username[0]) + Username[1..];
+			if (Username.Length is not 0) // capitalize first letter
+				Username = char.ToUpper(Username[0]) + Username[1..];
+
 			Console.WriteLine($"Okay, {Username}. Will you take THE COIN FLIP CHALLENGE?");
 			Console.WriteLine("[Y]es or [N]o?");
 			Console.WriteLine();
@@ -91,7 +94,9 @@
 			while (true)
 			{
 				var key = Console.ReadKey();
+				// erase key input from output
 				Console.Write("\b\\\b");
+				// check for y, n, or escape
 				switch (key.KeyChar)
 				{
 					case 'Y' or 'y':
